@@ -1,17 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+
 * {
   margin: 0;
   box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+}
+
+header {
+  text-align: right;
+  margin-right: 5%;
+  margin-top: 2.5%;
+}
+
+section {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+}
+
+.button-container {
+  margin: 1rem 0;
+  margin-left: 55%;
+  display: flex;
+}
+
+input,
+button {
+  height: 4vh;
 }
 
 .table-container {
+  margin: 1rem 0;
   max-width: 100vw;
+  max-height: 50vh;
   display: grid;
   place-items: center;
   overflow-x: auto;
-}
-
-table {
-  display: none;
+  overflow-y: auto;
 }
 
 table,
@@ -35,4 +60,9 @@ th {
 
 tr:hover {
   background-color: rgba(150, 150, 150, 0.5);
+}
+
+footer {
+  display: grid;
+  place-items: end center;
 }
