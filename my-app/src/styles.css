@@ -20,13 +20,33 @@ section {
 
 .button-container {
   margin: 1rem 0;
-  margin-left: 55%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 25vw;
+  padding: 1rem;
 }
 
 input,
 button {
   height: 4vh;
+}
+
+.new-ticket-form {
+  margin-top: 55vh;
+  position: absolute;
+  z-index: 1;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  background: grey;
+  padding: 4rem;
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  place-items: stretch;
+}
+
+.ticket-submit {
+  grid-column-end: span 2;
 }
 
 .table-container {
@@ -60,6 +80,7 @@ th {
 
 tr:hover {
   background-color: rgba(150, 150, 150, 0.5);
+  cursor: pointer;
 }
 
 footer {

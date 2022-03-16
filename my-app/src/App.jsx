@@ -3,19 +3,9 @@ import "./styles.css";
 
 function App() {
   let [data, setData] = useState(null);
-  let [query, setQuery] = useState(null);
-
-  let getAllData = () => {
-    fetch("http://localhost:3000/tickets")
-      .then((data) => {
-        return data.json();
-      })
-      .then((data) => setData(data));
-  };
+  let [query, setQuery] = useState("");
 
   let getSearchedData = async () => {
-    setQuery(document.getElementById("search-bar").value);
-
     fetch(`http://localhost:3000/tickets/${query}`)
       .then((data) => {
         return data.json();
@@ -23,26 +13,46 @@ function App() {
       .then((data) => setData(data));
   };
 
+  const handleSearch = async (event) => {
+    await setQuery(event.target.value.toLowerCase());
+  };
+
   useEffect(() => {
-    getAllData();
-  }, []);
+    getSearchedData()
+  }, [query]);
 
   return (
     <div>
-      <header>
-        <nav>
-          <a href="">Home</a>
-        </nav>
-        <img />
-      </header>
       <section>
         <div className="button-container">
           <form>
-            <input type="text" placeholder="search tickets" id="seach-bar" />
-            <button onSubmit={getSearchedData()}>Submit</button>
+            <input type="search" placeholder="search tickets" onChange={handleSearch} value={query}/>
           </form>
-          <button>Create Ticket</button>
+          <button onClick={() => document.getElementById('new-ticket-form').style.display = 'grid'}>Create Ticket</button>
         </div>
+        <form className="new-ticket-form" id="new-ticket-form">
+            <label> Date:</label>
+            <input type="date" />
+            <label> First Name:</label>
+            <input type="text" />
+            <label> Last Name:</label>
+            <input type="text" />
+            <label> Email:</label>
+            <input type="email" />
+            <label> Phone Number:</label>
+            <input type="tel" />
+            <label> Brand/Model:</label>
+            <input type="text" />
+            <label> Serial:</label>
+            <input type="text" />
+            <label> Issue:</label>
+            <textarea cols="30" rows="5" />
+            <label> Notes:</label>
+            <textarea cols="30" rows="5" />
+            <label> Employee:</label>
+            <input type="text" />
+            <input type='submit' className="ticket-submit" onClick={() => document.getElementById('new-ticket-form').style.display = 'none'}></input>
+          </form>
         <div className="table-container">
           <table id="table">
             <thead>
@@ -64,7 +74,7 @@ function App() {
               ? data.map((element) => {
                   return (
                     <tbody>
-                      <tr>
+                      <tr onClick={() => console.log('test')}>
                         <td>{element.id}</td>
                         <td>{element.date}</td>
                         <td>{element.first_name}</td>
