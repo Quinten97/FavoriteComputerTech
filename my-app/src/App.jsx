@@ -4,6 +4,7 @@ import "./styles.css";
 function App() {
   const [data, setData] = useState(null);
   const [query, setQuery] = useState("");
+  const [idQuery, setIdQuery] = useState("");
   const [postData, setPostData] = useState({});
 
   const getSearchedData = async () => {
@@ -14,69 +15,128 @@ function App() {
       .then((data) => setData(data));
   };
 
+  const getSearchedDataById = async () => {
+    fetch(`http://localhost:3000/tickets/byId/${idQuery}`)
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => setData(data));
+  };
+
   const postTicketData = (ticketData) => {
-    fetch('http://localhost:3000/tickets', {
-      method:"POST",
+    fetch("http://localhost:3000/tickets", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(ticketData)
+      body: JSON.stringify(ticketData),
     })
-    .then(alert('Ticket Created'))
-    .catch(err => console.warn(err))
+      .then(alert("Ticket Created"))
+      .catch((err) => console.warn(err));
   };
 
   const handleSearch = async (event) => {
     await setQuery(event.target.value.toLowerCase());
   };
 
+  const handleSearchById = async (event) => {
+    await setIdQuery(event.target.value.toLowerCase());
+  };
+
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const formData = new FormData(event.target);
-    const data = Array.from(formData.entries())
-    let ticketData ={}
-    data.forEach(([name, value]) => ticketData[name]= value.toLowerCase()) 
+    const data = Array.from(formData.entries());
+    let ticketData = {};
+    data.forEach(([name, value]) => (ticketData[name] = value.toLowerCase()));
     postTicketData(ticketData);
   };
-  
+
   useEffect(() => {
-    getSearchedData()
-  }, [query]);
+    getSearchedData();
+    // getSearchedDataById();
+  }, []);
 
   return (
+    // Search bar
     <div>
       <section>
         <div className="button-container">
-          <form>
-            <input type="search" placeholder="search tickets" onChange={handleSearch} value={query} />
+          <form
+            onSubmit={(event) => {
+              if (query !== "") {
+                event.preventDefault();
+                getSearchedData();
+              } else if (idQuery !== "") {
+                event.preventDefault();
+                getSearchedDataById();
+              } else {
+                event.preventDefault();
+                getSearchedData();
+              }
+            }}
+          >
+            <input
+              type="search"
+              placeholder="search"
+              onChange={handleSearch}
+              value={query}
+            />
+            <input
+              type="search"
+              placeholder="search by id"
+              onChange={handleSearchById}
+              value={idQuery}
+            />
+            <input type="submit" />
           </form>
-          <button onClick={() => document.getElementById('new-ticket-form').style.display = 'grid'}>Create Ticket</button>
+          {/* create ticket button and dialouge */}
+          <button
+            onClick={() =>
+              (document.getElementById("new-ticket-form").style.display =
+                "grid")
+            }
+          >
+            Create Ticket
+          </button>
         </div>
-        <form className="new-ticket-form" id="new-ticket-form" onSubmit={(e) => {
-          handleSubmit(e)
-        }}>
-            <label> Date:</label>
-            <input type="date" name="date"/>
-            <label> First Name:</label>
-            <input type="text" name="firstName"/>
-            <label> Last Name:</label>
-            <input type="text" name="lastName"/>
-            <label> Email:</label>
-            <input type="email" name="email"/>
-            <label> Phone Number:</label>
-            <input type="tel" name="phoneNumber"/>
-            <label> Brand/Model:</label>
-            <input type="text" name="brandModel"/>
-            <label> Serial:</label>
-            <input type="text" name="serial"/>
-            <label> Issue:</label>
-            <textarea cols="30" rows="5" name="issue"/>
-            <label> Notes:</label>
-            <textarea cols="30" rows="5" name="notes"/>
-            <label> Employee:</label>
-            <input type="text" name="employee"/>
-            <input type='submit' className="ticket-submit" onClick={() => document.getElementById('new-ticket-form').style.display = 'none'}></input>
-          </form>
+        <form
+          className="new-ticket-form"
+          id="new-ticket-form"
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          <label> Date:</label>
+          <input type="date" name="date" />
+          <label> First Name:</label>
+          <input type="text" name="firstName" />
+          <label> Last Name:</label>
+          <input type="text" name="lastName" />
+          <label> Email:</label>
+          <input type="email" name="email" />
+          <label> Phone Number:</label>
+          <input type="tel" name="phoneNumber" />
+          <label> Brand/Model:</label>
+          <input type="text" name="brandModel" />
+          <label> Serial:</label>
+          <input type="text" name="serial" />
+          <label> Issue:</label>
+          <textarea cols="30" rows="5" name="issue" />
+          <label> Notes:</label>
+          <textarea cols="30" rows="5" name="notes" />
+          <label> Employee:</label>
+          <input type="text" name="employee" />
+          <input
+            type="submit"
+            className="ticket-submit"
+            onClick={() =>
+              (document.getElementById("new-ticket-form").style.display =
+                "none")
+            }
+          ></input>
+        </form>
+        {/* Display Table */}
         <div className="table-container">
           <table id="table">
             <thead>
@@ -92,13 +152,14 @@ function App() {
                 <th>Issue:</th>
                 <th>Notes:</th>
                 <th>Employee:</th>
+                <th>Status:</th>
               </tr>
             </thead>
             {data !== null
               ? data.map((element) => {
                   return (
                     <tbody>
-                      <tr onClick={() => console.log('test')}>
+                      <tr onClick={() => console.log("test")}>
                         <td>{element.id}</td>
                         <td>{element.date}</td>
                         <td>{element.first_name}</td>
@@ -110,6 +171,7 @@ function App() {
                         <td>{element.issue}</td>
                         <td>{element.notes}</td>
                         <td>{element.employee}</td>
+                        <td>{element.status}</td>
                       </tr>
                     </tbody>
                   );
