@@ -8,7 +8,7 @@ function App() {
   const [postData, setPostData] = useState({});
 
   const getSearchedData = async () => {
-    fetch(`http://localhost:3000/tickets/${query}`)
+    fetch(`http://localhost:5000/tickets/${query}`)
       .then((data) => {
         return data.json();
       })
@@ -16,7 +16,7 @@ function App() {
   };
 
   const getSearchedDataById = async () => {
-    fetch(`http://localhost:3000/tickets/byId/${idQuery}`)
+    fetch(`http://localhost:5000/tickets/byId/${idQuery}`)
       .then((data) => {
         return data.json();
       })
@@ -24,7 +24,7 @@ function App() {
   };
 
   const postTicketData = (ticketData) => {
-    fetch("http://localhost:3000/tickets", {
+    fetch("http://localhost:5000/tickets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,7 @@ function App() {
       body: JSON.stringify(ticketData),
     })
       .then(alert("Ticket Created"))
-      .catch((err) => console.warn(err));
+      .catch((err) => alert(err));
   };
 
   const handleSearch = async (event) => {
@@ -55,7 +55,7 @@ function App() {
   useEffect(() => {
     getSearchedData();
     // getSearchedDataById();
-  }, []);
+  }, [query]);
 
   return (
     // Search bar
@@ -172,6 +172,56 @@ function App() {
                         <td>{element.notes}</td>
                         <td>{element.employee}</td>
                         <td>{element.status}</td>
+                        <td>
+                          <button
+                            onClick={() => {
+                              fetch(
+                                `http://localhost:5000/tickets/${element.id}`,
+                                {
+                                  method: "PATCH",
+                                  headers: {
+                                    "Content-Type": "application/json",
+                                  },
+                                  body: JSON.stringify({
+                                    column: "status",
+                                    value: `${
+                                      element.status === "open"
+                                        ? "closed"
+                                        : "open"
+                                    }`,
+                                  }),
+                                }
+                              )
+                                .then((response) => response.json)
+                                .then((res) => console.log(res))
+                                .then(alert(`Status Changed`))
+                                .catch((err) => alert(err));
+                              window.location.reload(false);
+                            }}
+                          >
+                            {element.status === "open" ? "closed" : "open"}
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => {
+                              fetch(
+                                `http://localhost:5000/tickets/${element.id}`,
+                                {
+                                  method: "DELETE",
+                                }
+                              )
+                                .then((res) => {
+                                  console.log(res);
+                                })
+                                .then(alert(`ticket ${element.id} deleted`))
+                                .catch((err) => console.log(err));
+                              window.location.reload(false);
+                            }}
+                          >
+                            Delete
+                          </button>
+                        </td>
                       </tr>
                     </tbody>
                   );
