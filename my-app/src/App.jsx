@@ -52,6 +52,11 @@ function App() {
     postTicketData(ticketData);
   };
 
+  const handleOpenClose = (e, id, value) => {
+    e.preventDefault();
+    document.getElementById(id).style.display = value;
+  };
+
   useEffect(() => {
     getSearchedData();
     // getSearchedDataById();
@@ -136,6 +141,126 @@ function App() {
             }
           ></input>
         </form>
+
+        <form className="update-form" id="date">
+          <label style={{ marginBottom: "1rem", textAlign: "center" }}>
+            Update Date:
+          </label>
+          <input
+            type="date"
+            style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
+          ></input>
+          <input type="submit"></input>
+          <button
+            onClick={(e) => {
+              handleOpenClose(e, "date", "none");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+        <form className="update-form" id="first-name">
+          <label style={{ textAlign: "center", marginBottom: "1rem" }}>
+            Update First Name:
+          </label>
+          <input
+            type="text"
+            style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
+          ></input>
+          <input type="submit"></input>
+          <button
+            onClick={(e) => {
+              handleOpenClose(e, "first-name", "none");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+        <form className="update-form" id="last-name">
+          <label>Update Last Name:</label>
+          <input type="text"></input>
+          <input type="submit"></input>
+          <button
+            onClick={(e) => {
+              handleOpenClose(e, "last-name", "none");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+        <form className="update-form" id="email">
+          <label>Update Email:</label>
+          <input type="email"></input>
+          <input type="submit"></input>
+          <button
+            onClick={(e) => {
+              handleOpenClose(e, "email", "none");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+        <form className="update-form" id="phone">
+          <label>Update Phone Number:</label>
+          <input type="text"></input>
+          <input type="submit"></input>
+          <button
+            onClick={(e) => {
+              handleOpenClose(e, "phone", "none");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+        <form className="update-form" id="brand-model">
+          <label>Update Brand/Model:</label>
+          <input type="text"></input>
+          <input type="submit"></input>
+          <button
+            onClick={(e) => {
+              handleOpenClose(e, "brand-model", "none");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+        <form className="update-form" id="serial">
+          <label>Update Serial:</label>
+          <input type="text"></input>
+          <input type="submit"></input>
+          <button
+            onClick={(e) => {
+              handleOpenClose(e, "serial", "none");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+        <form className="update-form" id="issue">
+          <label>Update Issue:</label>
+          <textarea col="25" rows="5"></textarea>
+          <input type="submit"></input>
+          <button
+            onClick={(e) => {
+              handleOpenClose(e, "issue", "none");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+        <form className="update-form" id="notes">
+          <label>Update Notes:</label>
+          <textarea col="25" rows="5"></textarea>
+          <input type="submit"></input>
+          <button
+            onClick={(e) => {
+              handleOpenClose(e, "notes", "none");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+
         {/* Display Table */}
         <div className="table-container">
           <table id="table">
@@ -159,17 +284,71 @@ function App() {
               ? data.map((element) => {
                   return (
                     <tbody>
-                      <tr onClick={() => console.log("test")}>
+                      <tr>
                         <td>{element.id}</td>
-                        <td>{element.date}</td>
-                        <td>{element.first_name}</td>
-                        <td>{element.last_name}</td>
-                        <td>{element.email}</td>
-                        <td>{element.phone_number}</td>
-                        <td>{element.brand_model}</td>
-                        <td>{element.serial}</td>
-                        <td>{element.issue}</td>
-                        <td>{element.notes}</td>
+                        <td
+                          onClick={(e) => {
+                            handleOpenClose(e, "date", "grid");
+                          }}
+                        >
+                          {element.date}
+                        </td>
+                        <td
+                          onClick={(e) => {
+                            handleOpenClose(e, "first-name", "grid");
+                          }}
+                        >
+                          {element.first_name}
+                        </td>
+                        <td
+                          onClick={(e) => {
+                            handleOpenClose(e, "last-name", "grid");
+                          }}
+                        >
+                          {element.last_name}
+                        </td>
+                        <td
+                          onClick={(e) => {
+                            handleOpenClose(e, "email", "grid");
+                          }}
+                        >
+                          {element.email}
+                        </td>
+                        <td
+                          onClick={(e) => {
+                            handleOpenClose(e, "phone", "grid");
+                          }}
+                        >
+                          {element.phone_number}
+                        </td>
+                        <td
+                          onClick={(e) => {
+                            handleOpenClose(e, "brand-model", "grid");
+                          }}
+                        >
+                          {element.brand_model}
+                        </td>
+                        <td
+                          onClick={(e) => {
+                            handleOpenClose(e, "serial", "grid");
+                          }}
+                        >
+                          {element.serial}
+                        </td>
+                        <td
+                          onClick={(e) => {
+                            handleOpenClose(e, "issue", "grid");
+                          }}
+                        >
+                          {element.issue}
+                        </td>
+                        <td
+                          onClick={(e) => {
+                            handleOpenClose(e, "notes", "grid");
+                          }}
+                        >
+                          {element.notes}
+                        </td>
                         <td>{element.employee}</td>
                         <td>{element.status}</td>
                         <td>
