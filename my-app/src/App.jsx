@@ -5,7 +5,8 @@ function App() {
   const [data, setData] = useState(null);
   const [query, setQuery] = useState("");
   const [idQuery, setIdQuery] = useState("");
-  const [postData, setPostData] = useState({});
+
+  let updateId = 0;
 
   const getSearchedData = async () => {
     fetch(`http://localhost:5000/tickets/${query}`)
@@ -52,9 +53,33 @@ function App() {
     postTicketData(ticketData);
   };
 
+  const updateSubmit = (element) => {
+    let inputData = document.getElementById(element).value;
+    return inputData;
+  };
+
   const handleOpenClose = (e, id, value) => {
     e.preventDefault();
     document.getElementById(id).style.display = value;
+  };
+
+  const updateColumn = (e, id, column, value) => {
+    e.preventDefault();
+    fetch(`http://localhost:5000/tickets/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        column: column,
+        value: value,
+      }),
+    })
+      .then((response) => response.json)
+      .then((res) => console.log(res))
+      .then(alert(`Ticket Updated`))
+      .catch((err) => alert(err));
+    window.location.reload(false);
   };
 
   useEffect(() => {
@@ -147,10 +172,17 @@ function App() {
             Update Date:
           </label>
           <input
+            id="input-date"
             type="date"
             style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
           ></input>
-          <input type="submit"></input>
+          <input
+            type="submit"
+            onClick={(e) => {
+              handleOpenClose(e, "date", "none");
+              updateColumn(e, updateId, "date", updateSubmit("input-date"));
+            }}
+          ></input>
           <button
             onClick={(e) => {
               handleOpenClose(e, "date", "none");
@@ -164,10 +196,22 @@ function App() {
             Update First Name:
           </label>
           <input
+            id="input-first-name"
             type="text"
             style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
           ></input>
-          <input type="submit"></input>
+          <input
+            type="submit"
+            onClick={(e) => {
+              handleOpenClose(e, "date", "none");
+              updateColumn(
+                e,
+                updateId,
+                "first_name",
+                updateSubmit("input-first-name")
+              );
+            }}
+          ></input>
           <button
             onClick={(e) => {
               handleOpenClose(e, "first-name", "none");
@@ -177,9 +221,26 @@ function App() {
           </button>
         </form>
         <form className="update-form" id="last-name">
-          <label>Update Last Name:</label>
-          <input type="text"></input>
-          <input type="submit"></input>
+          <label style={{ textAlign: "center", marginBottom: "1rem" }}>
+            Update Last Name:
+          </label>
+          <input
+            id="input-last-name"
+            type="text"
+            style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
+          ></input>
+          <input
+            type="submit"
+            onClick={(e) => {
+              handleOpenClose(e, "date", "none");
+              updateColumn(
+                e,
+                updateId,
+                "last_name",
+                updateSubmit("input-last-name")
+              );
+            }}
+          ></input>
           <button
             onClick={(e) => {
               handleOpenClose(e, "last-name", "none");
@@ -189,9 +250,21 @@ function App() {
           </button>
         </form>
         <form className="update-form" id="email">
-          <label>Update Email:</label>
-          <input type="email"></input>
-          <input type="submit"></input>
+          <label style={{ textAlign: "center", marginBottom: "1rem" }}>
+            Update Email:
+          </label>
+          <input
+            id="input-email"
+            type="email"
+            style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
+          ></input>
+          <input
+            type="submit"
+            onClick={(e) => {
+              handleOpenClose(e, "date", "none");
+              updateColumn(e, updateId, "email", updateSubmit("input-email"));
+            }}
+          ></input>
           <button
             onClick={(e) => {
               handleOpenClose(e, "email", "none");
@@ -201,9 +274,26 @@ function App() {
           </button>
         </form>
         <form className="update-form" id="phone">
-          <label>Update Phone Number:</label>
-          <input type="text"></input>
-          <input type="submit"></input>
+          <label style={{ textAlign: "center", marginBottom: "1rem" }}>
+            Update Phone Number:
+          </label>
+          <input
+            id="input-phone-number"
+            type="text"
+            style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
+          ></input>
+          <input
+            type="submit"
+            onClick={(e) => {
+              handleOpenClose(e, "date", "none");
+              updateColumn(
+                e,
+                updateId,
+                "phone_number",
+                updateSubmit("input-phone-number")
+              );
+            }}
+          ></input>
           <button
             onClick={(e) => {
               handleOpenClose(e, "phone", "none");
@@ -213,9 +303,26 @@ function App() {
           </button>
         </form>
         <form className="update-form" id="brand-model">
-          <label>Update Brand/Model:</label>
-          <input type="text"></input>
-          <input type="submit"></input>
+          <label style={{ textAlign: "center", marginBottom: "1rem" }}>
+            Update Brand/Model:
+          </label>
+          <input
+            id="input-brand-model"
+            type="text"
+            style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
+          ></input>
+          <input
+            type="submit"
+            onClick={(e) => {
+              handleOpenClose(e, "date", "none");
+              updateColumn(
+                e,
+                updateId,
+                "brand_model",
+                updateSubmit("input-brand-model")
+              );
+            }}
+          ></input>
           <button
             onClick={(e) => {
               handleOpenClose(e, "brand-model", "none");
@@ -225,9 +332,21 @@ function App() {
           </button>
         </form>
         <form className="update-form" id="serial">
-          <label>Update Serial:</label>
-          <input type="text"></input>
-          <input type="submit"></input>
+          <label style={{ textAlign: "center", marginBottom: "1rem" }}>
+            Update Serial:
+          </label>
+          <input
+            id="input-serial"
+            type="text"
+            style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
+          ></input>
+          <input
+            type="submit"
+            onClick={(e) => {
+              handleOpenClose(e, "date", "none");
+              updateColumn(e, updateId, "serial", updateSubmit("input-serial"));
+            }}
+          ></input>
           <button
             onClick={(e) => {
               handleOpenClose(e, "serial", "none");
@@ -237,9 +356,22 @@ function App() {
           </button>
         </form>
         <form className="update-form" id="issue">
-          <label>Update Issue:</label>
-          <textarea col="25" rows="5"></textarea>
-          <input type="submit"></input>
+          <label style={{ textAlign: "center", marginBottom: "1rem" }}>
+            Update Issue:
+          </label>
+          <textarea
+            id="input-issue"
+            col="25"
+            rows="5"
+            style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
+          ></textarea>
+          <input
+            type="submit"
+            onClick={(e) => {
+              handleOpenClose(e, "date", "none");
+              updateColumn(e, updateId, "issue", updateSubmit("input-issue"));
+            }}
+          ></input>
           <button
             onClick={(e) => {
               handleOpenClose(e, "issue", "none");
@@ -249,9 +381,17 @@ function App() {
           </button>
         </form>
         <form className="update-form" id="notes">
-          <label>Update Notes:</label>
-          <textarea col="25" rows="5"></textarea>
-          <input type="submit"></input>
+          <label style={{ textAlign: "center", marginBottom: "1rem" }}>
+            Update Notes:
+          </label>
+          <textarea id="input-notes" col="25" rows="5"></textarea>
+          <input
+            type="submit"
+            onClick={(e) => {
+              handleOpenClose(e, "date", "none");
+              updateColumn(e, updateId, "notes", updateSubmit("input-notes"));
+            }}
+          ></input>
           <button
             onClick={(e) => {
               handleOpenClose(e, "notes", "none");
@@ -278,6 +418,8 @@ function App() {
                 <th>Notes:</th>
                 <th>Employee:</th>
                 <th>Status:</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             {data !== null
@@ -289,6 +431,8 @@ function App() {
                         <td
                           onClick={(e) => {
                             handleOpenClose(e, "date", "grid");
+                            updateId = element.id;
+                            alert(updateId);
                           }}
                         >
                           {element.date}
@@ -296,6 +440,7 @@ function App() {
                         <td
                           onClick={(e) => {
                             handleOpenClose(e, "first-name", "grid");
+                            updateId = element.id;
                           }}
                         >
                           {element.first_name}
@@ -303,6 +448,7 @@ function App() {
                         <td
                           onClick={(e) => {
                             handleOpenClose(e, "last-name", "grid");
+                            updateId = element.id;
                           }}
                         >
                           {element.last_name}
@@ -310,6 +456,7 @@ function App() {
                         <td
                           onClick={(e) => {
                             handleOpenClose(e, "email", "grid");
+                            updateId = element.id;
                           }}
                         >
                           {element.email}
@@ -317,6 +464,7 @@ function App() {
                         <td
                           onClick={(e) => {
                             handleOpenClose(e, "phone", "grid");
+                            updateId = element.id;
                           }}
                         >
                           {element.phone_number}
@@ -324,6 +472,7 @@ function App() {
                         <td
                           onClick={(e) => {
                             handleOpenClose(e, "brand-model", "grid");
+                            updateId = element.id;
                           }}
                         >
                           {element.brand_model}
@@ -331,6 +480,7 @@ function App() {
                         <td
                           onClick={(e) => {
                             handleOpenClose(e, "serial", "grid");
+                            updateId = element.id;
                           }}
                         >
                           {element.serial}
@@ -338,6 +488,7 @@ function App() {
                         <td
                           onClick={(e) => {
                             handleOpenClose(e, "issue", "grid");
+                            updateId = element.id;
                           }}
                         >
                           {element.issue}
@@ -345,6 +496,7 @@ function App() {
                         <td
                           onClick={(e) => {
                             handleOpenClose(e, "notes", "grid");
+                            updateId = element.id;
                           }}
                         >
                           {element.notes}
@@ -353,6 +505,12 @@ function App() {
                         <td>{element.status}</td>
                         <td>
                           <button
+                            style={{
+                              background: "yellow",
+                              border: "none",
+                              borderRadius: "0.25rem",
+                              cursor: "pointer",
+                            }}
                             onClick={() => {
                               fetch(
                                 `http://localhost:5000/tickets/${element.id}`,
@@ -378,11 +536,18 @@ function App() {
                               window.location.reload(false);
                             }}
                           >
-                            {element.status === "open" ? "closed" : "open"}
+                            {element.status === "open" ? "close" : "open"}
                           </button>
                         </td>
                         <td>
                           <button
+                            style={{
+                              background: "red",
+                              border: "none",
+                              borderRadius: "0.25rem",
+                              color: "white",
+                              cursor: "pointer",
+                            }}
                             onClick={() => {
                               fetch(
                                 `http://localhost:5000/tickets/${element.id}`,
