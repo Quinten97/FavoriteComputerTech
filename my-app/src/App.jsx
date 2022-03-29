@@ -9,7 +9,7 @@ function App() {
   let updateId = 0;
 
   const getSearchedData = async () => {
-    fetch(`http://localhost:5000/tickets/${query}`)
+    fetch(`https://incandescent-atom-crater.glitch.me/tickets/${query}`)
       .then((data) => {
         return data.json();
       })
@@ -17,7 +17,7 @@ function App() {
   };
 
   const getSearchedDataById = async () => {
-    fetch(`http://localhost:5000/tickets/byId/${idQuery}`)
+    fetch(`https://incandescent-atom-crater.glitch.me/tickets/byId/${idQuery}`)
       .then((data) => {
         return data.json();
       })
@@ -25,7 +25,7 @@ function App() {
   };
 
   const postTicketData = (ticketData) => {
-    fetch("http://localhost:5000/tickets", {
+    fetch("https://incandescent-atom-crater.glitch.me/tickets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ function App() {
 
   const updateColumn = (e, id, column, value) => {
     e.preventDefault();
-    fetch(`http://localhost:5000/tickets/${id}`, {
+    fetch(`https://incandescent-atom-crater.glitch.me/tickets/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -551,7 +551,7 @@ function App() {
                             }}
                             onClick={() => {
                               fetch(
-                                `http://localhost:5000/tickets/${element.id}`,
+                                `https://incandescent-atom-crater.glitch.me/${element.id}`,
                                 {
                                   method: "PATCH",
                                   headers: {
@@ -588,7 +588,7 @@ function App() {
                             }}
                             onClick={() => {
                               fetch(
-                                `http://localhost:5000/tickets/${element.id}`,
+                                `https://incandescent-atom-crater.glitch.me/${element.id}`,
                                 {
                                   method: "DELETE",
                                 }
