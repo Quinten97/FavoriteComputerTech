@@ -51,6 +51,7 @@ function App() {
     let ticketData = {};
     data.forEach(([name, value]) => (ticketData[name] = value.toLowerCase()));
     postTicketData(ticketData);
+    window.location.reload(false);
   };
 
   const updateSubmit = (element) => {
@@ -122,6 +123,15 @@ function App() {
           </form>
           {/* create ticket button and dialouge */}
           <button
+            className="create-ticket-button"
+            style={{
+              height: "2.5rem",
+              width: "15rem",
+              background: "#191ca9",
+              border: "none",
+              borderRadius: "0.25rem",
+              color: "white",
+            }}
             onClick={() =>
               (document.getElementById("new-ticket-form").style.display =
                 "grid")
@@ -133,38 +143,61 @@ function App() {
         <form
           className="new-ticket-form"
           id="new-ticket-form"
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
+          onSubmit={(e) => handleSubmit(e)}
         >
           <label> Date:</label>
-          <input type="date" name="date" />
+          <input type="date" name="date" required />
           <label> First Name:</label>
-          <input type="text" name="firstName" />
+          <input type="text" name="firstName" required />
           <label> Last Name:</label>
-          <input type="text" name="lastName" />
+          <input type="text" name="lastName" required />
           <label> Email:</label>
-          <input type="email" name="email" />
+          <input type="email" name="email" required />
           <label> Phone Number:</label>
-          <input type="tel" name="phoneNumber" />
+          <input type="tel" name="phoneNumber" required />
           <label> Brand/Model:</label>
-          <input type="text" name="brandModel" />
+          <input type="text" name="brandModel" required />
           <label> Serial:</label>
-          <input type="text" name="serial" />
+          <input type="text" name="serial" required />
           <label> Issue:</label>
-          <textarea cols="30" rows="5" name="issue" />
+          <textarea cols="30" rows="5" name="issue" required />
           <label> Notes:</label>
-          <textarea cols="30" rows="5" name="notes" />
+          <textarea cols="30" rows="5" name="notes" required />
           <label> Employee:</label>
-          <input type="text" name="employee" />
-          <input
-            type="submit"
-            className="ticket-submit"
-            onClick={() =>
-              (document.getElementById("new-ticket-form").style.display =
-                "none")
-            }
-          ></input>
+          <input type="text" name="employee" required />
+          <div className="new-ticket-button-container">
+            <input
+              style={{
+                background: "yellow",
+                border: "none",
+                borderRadius: "0.25rem",
+                height: "2.5rem",
+              }}
+              type="submit"
+              className="ticket-submit"
+              onClick={() => {
+                document.getElementById("new-ticket-form").style.display =
+                  "none";
+              }}
+            ></input>
+            <button
+              style={{
+                background: "red",
+                border: "none",
+                color: "white",
+                borderRadius: "0.25rem",
+                height: "2.5rem",
+              }}
+              className="ticket-cancel"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("new-ticket-form").style.display =
+                  "none";
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </form>
 
         <form className="update-form" id="date">
@@ -384,7 +417,12 @@ function App() {
           <label style={{ textAlign: "center", marginBottom: "1rem" }}>
             Update Notes:
           </label>
-          <textarea id="input-notes" col="25" rows="5"></textarea>
+          <textarea
+            id="input-notes"
+            col="25"
+            rows="5"
+            style={{ gridColumnEnd: "span 2", marginBottom: "0.5rem" }}
+          ></textarea>
           <input
             type="submit"
             onClick={(e) => {

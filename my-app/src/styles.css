@@ -1,9 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 
+:root {
+  --main-color: #191ca9;
+  --secondary-color: #5cc2f2;
+  --neutral-color: #2e2c2f;
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
   font-family: "Ubuntu", sans-serif;
+}
+
+body {
+  background: var(--neutral-color);
 }
 
 header {
@@ -38,16 +48,26 @@ button {
   z-index: 1;
   border: 1px solid black;
   border-radius: 0.25rem;
-  background: grey;
+  background: var(--neutral-color);
   padding: 4rem;
   display: none;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
   place-items: stretch;
+  color: white;
 }
 
-.ticket-submit {
-  grid-column-end: span 2;
+.new-ticket-button-container {
+  grid-column-start: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ticket-submit:hover,
+.ticket-cancel:hover,
+.create-ticket-button:hover {
+  filter: brightness(85%);
+  transform: scale(1.02);
 }
 
 .table-container {
@@ -63,6 +83,7 @@ button {
 table,
 th,
 td {
+  background: white;
   text-align: center;
   border: 1px solid black;
   border-collapse: collapse;
@@ -76,7 +97,7 @@ td {
 }
 
 th {
-  background-color: lightblue;
+  background-color: var(--secondary-color);
 }
 
 tr:hover {
@@ -85,12 +106,14 @@ tr:hover {
 }
 
 .update-form {
+  text-align: center;
+  color: white;
   margin-top: 55vh;
   position: absolute;
   z-index: 1;
   border: 1px solid black;
   border-radius: 0.25rem;
-  background: grey;
+  background: var(--neutral-color);
   padding: 3rem;
 }
 
@@ -107,20 +130,8 @@ tr:hover {
   grid-template-columns: 1fr 1fr;
 }
 
-#date,
-#first-name,
-#last-name,
-#email,
-#phone,
-#brand-model,
-#serial,
-#issue,
-#notes > textarea,
-label {
-  grid-column-end: span 2;
-}
-
 footer {
   display: grid;
   place-items: end center;
+  color: white;
 }
