@@ -9,7 +9,7 @@ function App() {
   let updateId = 0;
 
   const getSearchedData = async () => {
-    fetch(`https://incandescent-atom-crater.glitch.me/tickets/${query}`)
+    fetch(`https://favorite-ticketing-api.herokuapp.com/tickets/${query}`)
       .then((data) => {
         return data.json();
       })
@@ -17,7 +17,7 @@ function App() {
   };
 
   const getSearchedDataById = async () => {
-    fetch(`https://incandescent-atom-crater.glitch.me/tickets/byId/${idQuery}`)
+    fetch(`https://favorite-ticketing-api.herokuapp.com/tickets/byId/${idQuery}`)
       .then((data) => {
         return data.json();
       })
@@ -25,7 +25,7 @@ function App() {
   };
 
   const postTicketData = (ticketData) => {
-    fetch("https://incandescent-atom-crater.glitch.me/tickets", {
+    fetch("https://favorite-ticketing-api.herokuapp.com/tickets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ function App() {
 
   const updateColumn = (e, id, column, value) => {
     e.preventDefault();
-    fetch(`https://incandescent-atom-crater.glitch.me/tickets/${id}`, {
+    fetch(`https://favorite-ticketing-api.herokuapp.com/tickets/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -551,7 +551,7 @@ function App() {
                             }}
                             onClick={() => {
                               fetch(
-                                `https://incandescent-atom-crater.glitch.me/${element.id}`,
+                                `https://favorite-ticketing-api.herokuapp.com/${element.id}`,
                                 {
                                   method: "PATCH",
                                   headers: {
@@ -588,7 +588,7 @@ function App() {
                             }}
                             onClick={() => {
                               fetch(
-                                `https://incandescent-atom-crater.glitch.me/${element.id}`,
+                                `https://favorite-ticketing-api.herokuapp.com/${element.id}`,
                                 {
                                   method: "DELETE",
                                 }
