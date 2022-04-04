@@ -551,7 +551,7 @@ function App() {
                             }}
                             onClick={() => {
                               fetch(
-                                `https://favorite-ticketing-api.herokuapp.com/${element.id}`,
+                                `https://favorite-ticketing-api.herokuapp.com/tickets/${element.id}`,
                                 {
                                   method: "PATCH",
                                   headers: {
@@ -588,7 +588,7 @@ function App() {
                             }}
                             onClick={() => {
                               fetch(
-                                `https://favorite-ticketing-api.herokuapp.com/${element.id}`,
+                                `https://favorite-ticketing-api.herokuapp.com/tickets/${element.id}`,
                                 {
                                   method: "DELETE",
                                 }
