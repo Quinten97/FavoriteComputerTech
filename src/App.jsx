@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
 
-getSearchedData();
-
 function App() {
   const [data, setData] = useState(null);
   const [query, setQuery] = useState("");
