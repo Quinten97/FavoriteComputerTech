@@ -17,7 +17,9 @@ function App() {
   };
 
   const getSearchedDataById = async () => {
-    fetch(`https://favorite-ticketing-api.herokuapp.com/tickets/byId/${idQuery}`)
+    fetch(
+      `https://favorite-ticketing-api.herokuapp.com/tickets/byId/${idQuery}`
+    )
       .then((data) => {
         return data.json();
       })
@@ -83,6 +85,7 @@ function App() {
     window.location.reload(false);
   };
 
+  getSearchedData();
   useEffect(() => {
     getSearchedData();
     // getSearchedDataById();
