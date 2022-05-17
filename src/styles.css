@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+
+:root {
+  --main-color: #191ca9;
+  --secondary-color: #5cc2f2;
+  --neutral-color: #2e2c2f;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+}
+
+body {
+  background: var(--neutral-color);
+}
+
+header {
+  text-align: right;
+  margin-right: 5%;
+  margin-top: 2.5%;
+}
+
+section {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+}
+
+.button-container {
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 25vw;
+  padding: 1rem;
+}
+
+input,
+button {
+  height: 4vh;
+  margin: 0 0.25rem;
+}
+
+.new-ticket-form {
+  margin-top: 55vh;
+  position: absolute;
+  z-index: 1;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  background: var(--neutral-color);
+  padding: 4rem;
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  place-items: stretch;
+  color: white;
+}
+
+.new-ticket-button-container {
+  grid-column-start: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ticket-submit:hover,
+.ticket-cancel:hover,
+.create-ticket-button:hover {
+  filter: brightness(85%);
+  transform: scale(1.02);
+}
+
+.table-container {
+  margin: 1rem 0;
+  max-width: 100vw;
+  max-height: 50vh;
+  display: grid;
+  place-items: center;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+table,
+th,
+td {
+  background: white;
+  text-align: center;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  height: 100%;
+  padding: 0.25rem;
+  vertical-align: center;
+}
+
+th {
+  background-color: var(--secondary-color);
+}
+
+tr:hover {
+  background-color: rgba(150, 150, 150, 0.5);
+  cursor: pointer;
+}
+
+.update-form {
+  text-align: center;
+  color: white;
+  margin-top: 55vh;
+  position: absolute;
+  z-index: 1;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  background: var(--neutral-color);
+  padding: 3rem;
+}
+
+#date,
+#first-name,
+#last-name,
+#email,
+#phone,
+#brand-model,
+#serial,
+#issue,
+#notes {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+}
+
+footer {
+  display: grid;
+  place-items: end center;
+  color: white;
+}
