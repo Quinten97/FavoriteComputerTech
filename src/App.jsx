@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
 
+getSearchedData();
+
 function App() {
   const [data, setData] = useState(null);
   const [query, setQuery] = useState("");
@@ -85,7 +87,6 @@ function App() {
     window.location.reload(false);
   };
 
-  getSearchedData();
   useEffect(() => {
     getSearchedData();
     // getSearchedDataById();
