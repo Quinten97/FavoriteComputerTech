@@ -89,7 +89,7 @@ function App() {
   useEffect(() => {
     getSearchedData();
     // getSearchedDataById();
-  });
+  }, [query]);
 
   return (
     // Search bar
