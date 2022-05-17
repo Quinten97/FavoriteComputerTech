@@ -610,7 +610,7 @@ function App() {
                     </tbody>
                   );
                 })
-              : ""}
+              : "...loading"}
           </table>
         </div>
       </section>
