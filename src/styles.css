@@ -105,6 +105,10 @@ tr:hover {
   cursor: pointer;
 }
 
+td:hover {
+  filter: brightness(25%);
+}
+
 .update-form {
   text-align: center;
   color: white;
