@@ -8,17 +8,19 @@ function App() {
 
   let updateId = 0;
 
+  const baseUrl = 'https://ticketing-system-api.vercel.app'
+
   const getSearchedData = async () => {
-    fetch(`https://favorite-ticketing-api.herokuapp.com/tickets/${query}`)
+    fetch(`${baseUrl}/tickets/${query}`)
       .then((data) => {
         return data.json();
       })
       .then((data) => setData(data));
   };
-
+console.log(getSearchedData)
   const getSearchedDataById = async () => {
     fetch(
-      `https://favorite-ticketing-api.herokuapp.com/tickets/byId/${idQuery}`
+      `${baseUrl}/tickets/byId/${idQuery}`
     )
       .then((data) => {
         return data.json();
@@ -27,7 +29,7 @@ function App() {
   };
 
   const postTicketData = (ticketData) => {
-    fetch("https://favorite-ticketing-api.herokuapp.com/tickets", {
+    fetch(`${baseUrl}/tickets`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +70,7 @@ function App() {
 
   const updateColumn = (e, id, column, value) => {
     e.preventDefault();
-    fetch(`https://favorite-ticketing-api.herokuapp.com/tickets/${id}`, {
+    fetch(`${baseUrl}/tickets/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -553,7 +555,7 @@ function App() {
                             }}
                             onClick={() => {
                               fetch(
-                                `https://favorite-ticketing-api.herokuapp.com/tickets/${element.id}`,
+                                `${baseUrl}/tickets/${element.id}`,
                                 {
                                   method: "PATCH",
                                   headers: {
@@ -590,7 +592,7 @@ function App() {
                             }}
                             onClick={() => {
                               fetch(
-                                `https://favorite-ticketing-api.herokuapp.com/tickets/${element.id}`,
+                                `${baseUrl}/tickets/${element.id}`,
                                 {
                                   method: "DELETE",
                                 }
