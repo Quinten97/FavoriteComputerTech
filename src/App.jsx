@@ -8,7 +8,7 @@ function App() {
 
   let updateId = 0;
 
-  const baseUrl = 'https://ticketing-system-api.vercel.app'
+  const baseUrl = "https://www.ticketing-system-api.vercel.app";
 
   const getSearchedData = async () => {
     fetch(`${baseUrl}/tickets/${query}`)
@@ -17,11 +17,9 @@ function App() {
       })
       .then((data) => setData(data));
   };
-console.log(getSearchedData)
+  console.log(getSearchedData);
   const getSearchedDataById = async () => {
-    fetch(
-      `${baseUrl}/tickets/byId/${idQuery}`
-    )
+    fetch(`${baseUrl}/tickets/byId/${idQuery}`)
       .then((data) => {
         return data.json();
       })
@@ -554,23 +552,20 @@ console.log(getSearchedData)
                               cursor: "pointer",
                             }}
                             onClick={() => {
-                              fetch(
-                                `${baseUrl}/tickets/${element.id}`,
-                                {
-                                  method: "PATCH",
-                                  headers: {
-                                    "Content-Type": "application/json",
-                                  },
-                                  body: JSON.stringify({
-                                    column: "status",
-                                    value: `${
-                                      element.status === "open"
-                                        ? "closed"
-                                        : "open"
-                                    }`,
-                                  }),
-                                }
-                              )
+                              fetch(`${baseUrl}/tickets/${element.id}`, {
+                                method: "PATCH",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                  column: "status",
+                                  value: `${
+                                    element.status === "open"
+                                      ? "closed"
+                                      : "open"
+                                  }`,
+                                }),
+                              })
                                 .then((response) => response.json)
                                 .then((res) => console.log(res))
                                 .then(alert(`Status Changed`))
@@ -591,12 +586,9 @@ console.log(getSearchedData)
                               cursor: "pointer",
                             }}
                             onClick={() => {
-                              fetch(
-                                `${baseUrl}/tickets/${element.id}`,
-                                {
-                                  method: "DELETE",
-                                }
-                              )
+                              fetch(`${baseUrl}/tickets/${element.id}`, {
+                                method: "DELETE",
+                              })
                                 .then((res) => {
                                   console.log(res);
                                 })
