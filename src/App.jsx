@@ -8,7 +8,7 @@ function App() {
 
   let updateId = 0;
 
-  const baseUrl = "https://favorite-ticketing-api.onrender.com/";
+  const baseUrl = "https://www.favorite-ticketing-api.onrender.com";
 
   const getSearchedData = async () => {
     fetch(`${baseUrl}/tickets/${query}`)
