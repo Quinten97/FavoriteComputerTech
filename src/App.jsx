@@ -8,7 +8,7 @@ function App() {
 
   let updateId = 0;
 
-  const baseUrl = "https://www.ticketing-system-api.vercel.app/";
+  const baseUrl = "https://www.ticketing-system-api.vercel.app";
 
   const getSearchedData = async () => {
     fetch(`${baseUrl}/tickets/${query}`)
